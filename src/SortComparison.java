@@ -4,7 +4,7 @@
  *  This class contains static methods that implementing sorting of an array of numbers
  *  using different sort algorithms.
  *
- *  @author
+ *  @author Can Zhou
  *  @version HT 2020
  */
 
@@ -18,9 +18,17 @@
      *
      */
     static double [] insertionSort (double a[]){
-
-        //todo: implement the sort
-    }//end insertionsort
+    	for(int i=0; i<a.length; i++) {
+    		for(int j=i; j>0; j--) {
+    			if(a[j] < a[j-1]) {
+    				double tmp = a[j];
+    				a[j] = a[j-1];
+    				a[j-1] = tmp;
+    			}
+    		}
+    	}
+    	return a;
+    }
 	
 	    /**
      * Sorts an array of doubles using Selection Sort.
@@ -30,10 +38,19 @@
      *
      */
     static double [] selectionSort (double a[]){
-
-         //todo: implement the sort
-
-    }//end selectionsort
+    	for(int i=0; i<a.length-1; i++) {
+    		int min_index = i;
+    		for(int j=i+1; j<a.length; j++) {
+    			if(a[j] < a[min_index]) {
+    				min_index = j;
+    			}
+    		}
+    		double tmp = a[i];
+    		a[i] = a[min_index];
+    		a[min_index] = tmp;
+    	}
+    	return a;
+    }
 
     /**
      * Sorts an array of doubles using Quick Sort.
@@ -43,10 +60,8 @@
      *
      */
     static double [] quickSort (double a[]){
-	
-		 //todo: implement the sort
-
-    }//end quicksort
+    	
+    }
 
     /**
      * Sorts an array of doubles using Merge Sort.
