@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 // -------------------------------------------------------------------------
 
 /**
@@ -60,7 +62,38 @@
      *
      */
     static double [] quickSort (double a[]){
-    	
+    	recursiveQuick(a, 0, a.length-1);
+    	return a;
+    }
+    
+    private static void recursiveQuick(double a[], int lo, int hi) {
+    	if(hi<=lo) {
+    		return;
+    	}
+    	int pivotPos = partition(a, lo, hi);
+    	recursiveQuick(a, lo, pivotPos-1);
+    	recursiveQuick(a, pivotPos+1, hi);
+    }
+    
+    private static int partition(double a[], int lo, int hi) {
+    	int i = lo;
+    	int j = hi+1;
+    	double pivot = a[lo];
+    	while(true) {
+    		while(a[++i] < pivot) {
+    			if(i == hi) break;
+    		}
+    		while(a[--j] > pivot) {
+    			if(j == lo) break;
+    		}
+    		if(i >= j) break;
+    		double temp = a[i];
+    		a[i] = a[j];
+    		a[j] = temp;
+    	}
+    	a[lo] = a[j];
+    	a[j] = pivot;
+    	return j;
     }
 
     /**
@@ -109,6 +142,9 @@
     public static void main(String[] args) {
 
         //todo: do experiments as per assignment instructions
+    	double a[] = {5,2,3,1,4};
+    	quickSort(a);
+    	System.out.println(Arrays.toString(a));
     }
 
  }//end class
