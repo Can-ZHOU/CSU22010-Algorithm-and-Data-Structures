@@ -6,7 +6,7 @@ import java.util.Arrays;
  *  This class contains static methods that implementing sorting of an array of numbers
  *  using different sort algorithms.
  *
- *  @author Can Zhou
+ *  @author Can Zhou (19324118 zhouc@tcd.ie)
  *  @version HT 2020
  */
 
@@ -32,7 +32,7 @@ import java.util.Arrays;
     	return a;
     }
 	
-	    /**
+	/**
      * Sorts an array of doubles using Selection Sort.
      * This method is static, thus it can be called as SortComparison.sort(a)
      * @param a: An unsorted array of doubles.
@@ -201,9 +201,9 @@ import java.util.Arrays;
     public static void main(String[] args) {
 
         //todo: do experiments as per assignment instructions
-    	double a[] = {5,2,3,1,4};
-    	mergeSortIterative(a);
-    	System.out.println(Arrays.toString(a));
+//    	double a[] = {5,2,3,1,4};
+//    	mergeSortIterative(a);
+//    	System.out.println(Arrays.toString(a));
     }
 
  }//end class
