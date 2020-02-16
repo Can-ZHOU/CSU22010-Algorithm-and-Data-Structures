@@ -112,10 +112,37 @@ import java.util.Arrays;
      */
 
     static double[] mergeSortIterative (double a[]) {
-
-		 //todo: implement the sort
-	
-    }//end mergesortIterative
+    	int N = a.length;
+    	double[] aux = new double[N];
+    	for(int sz=1; sz<N; sz = sz+sz) {
+    		for(int lo = 0; lo<N-sz; lo+=sz+sz) {
+    			mergeIterative(a, aux, lo, lo+sz-1, Math.min(lo+sz+sz-1, N-1));
+    		}
+    	}
+    	
+    	return a;
+    }
+    
+    private static void mergeIterative (double a[], double aux[], int lo, int mid, int hi) {
+    	// copy
+    	for(int k=lo; k<=hi; k++) {
+    		aux[k] = a[k];
+    	}
+    	
+    	// merge
+    	int i=lo, j=mid+1;
+    	for(int k=lo; k<=hi; k++) {
+    		if(i>mid) {
+    			a[k] = aux[j++];
+    		} else if(j>hi) {
+    			a[k] = aux[i++];
+    		} else if(aux[i]<=aux[j]) {
+    			a[k] = aux[i++];
+    		} else {
+    			a[k] = aux[j++];
+    		}
+    	}
+    }
     
     
     
@@ -127,12 +154,44 @@ import java.util.Arrays;
      * @return after the method returns, the array must be in ascending sorted order.
      */
     static double[] mergeSortRecursive (double a[]) {
+    	double[] aux = new double[a.length];
+    	mergeSortRecursive(a, aux, 0, a.length-1);
+    	return a;
+    }
+    
+    private static void mergeSortRecursive(double a[], double aux[], int lo, int hi) {
+    	if(hi<=lo) {
+    		return;
+    	}
     	
-
-    	//todo: implement the sort
-	
-   }//end mergeSortRecursive
+    	int mid = lo + (hi-lo)/2;
     	
+    	mergeSortRecursive(a, aux, lo, mid);
+    	mergeSortRecursive(a, aux, mid+1, hi);
+    	
+    	mergeRecursive(a, aux, lo, mid, hi);
+    }
+    
+    private static void mergeRecursive(double a[], double aux[], int lo, int mid, int hi) {
+    	// copy
+    	for(int k=lo; k<=hi; k++) {
+    		aux[k] = a[k];
+    	}
+    	
+    	// merge
+    	int i=lo, j=mid+1;
+    	for(int k=lo; k<=hi; k++) {
+    		if(i>mid) {
+    			a[k] = aux[j++];
+    		} else if(j>hi) {
+    			a[k] = aux[i++];
+    		} else if(aux[i]<=aux[j]) {
+    			a[k] = aux[i++];
+    		} else {
+    			a[k] = aux[j++];
+    		}
+    	}
+    }
     
 
 
@@ -143,7 +202,7 @@ import java.util.Arrays;
 
         //todo: do experiments as per assignment instructions
     	double a[] = {5,2,3,1,4};
-    	quickSort(a);
+    	mergeSortIterative(a);
     	System.out.println(Arrays.toString(a));
     }
 
