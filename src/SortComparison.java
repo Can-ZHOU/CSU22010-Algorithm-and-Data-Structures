@@ -20,6 +20,9 @@ import java.util.Arrays;
      *
      */
     static double [] insertionSort (double a[]){
+    	if(a==null || a.length < 2) {
+    		return a;
+    	}
     	for(int i=0; i<a.length; i++) {
     		for(int j=i; j>0; j--) {
     			if(a[j] < a[j-1]) {
@@ -40,6 +43,9 @@ import java.util.Arrays;
      *
      */
     static double [] selectionSort (double a[]){
+    	if(a==null || a.length < 2) {
+    		return a;
+    	}
     	for(int i=0; i<a.length-1; i++) {
     		int min_index = i;
     		for(int j=i+1; j<a.length; j++) {
@@ -62,6 +68,9 @@ import java.util.Arrays;
      *
      */
     static double [] quickSort (double a[]){
+    	if(a==null || a.length < 2) {
+    		return a;
+    	}
     	recursiveQuick(a, 0, a.length-1);
     	return a;
     }
@@ -83,8 +92,10 @@ import java.util.Arrays;
     		while(a[++i] < pivot) {
     			if(i == hi) break;
     		}
-    		while(a[--j] > pivot) {
-    			if(j == lo) break;
+    		while(a[--j] >= pivot) {
+    			if(j == lo) 
+    				break;	
+    			
     		}
     		if(i >= j) break;
     		double temp = a[i];
@@ -112,6 +123,9 @@ import java.util.Arrays;
      */
 
     static double[] mergeSortIterative (double a[]) {
+    	if(a==null || a.length < 2) {
+    		return a;
+    	}
     	int N = a.length;
     	double[] aux = new double[N];
     	for(int sz=1; sz<N; sz = sz+sz) {
@@ -154,6 +168,9 @@ import java.util.Arrays;
      * @return after the method returns, the array must be in ascending sorted order.
      */
     static double[] mergeSortRecursive (double a[]) {
+    	if(a==null || a.length < 2) {
+    		return a;
+    	}
     	double[] aux = new double[a.length];
     	mergeSortRecursive(a, aux, 0, a.length-1);
     	return a;

@@ -37,25 +37,25 @@ public class SortComparisonTest
     	a = SortComparison.insertionSort(a);
     	assertNull("Test empty array for insertSort", a);
     	
-//    	// Test selectionSort
-//    	a = {};
-//    	a = SortComparison.selectionSort(a);
-//    	assertNull("Test empty array for selectionSort", a);
-//    	
-//    	// Test quickSort
-//    	a = {};
-//    	a = SortComparison.quickSort(a);
-//    	assertNull("Test empty array for quickSort", a);
-//    	
-//    	// Test mergeSortIterative
-//    	a = null;
-//    	a = SortComparison.mergeSortIterative(a);
-//    	assertNull("Test empty array for mergeSortIterative", a);
-//    	
-//    	// Test mergeSortRecursive
-//    	a = null;
-//    	a = SortComparison.mergeSortRecursive(a);
-//    	assertNull("Test empty array for mergeSortRecursive", a);
+    	// Test selectionSort
+    	a = null;
+    	a = SortComparison.selectionSort(a);
+    	assertNull("Test empty array for selectionSort", a);
+    	
+    	// Test quickSort
+    	a = null;
+    	a = SortComparison.quickSort(a);
+    	assertNull("Test empty array for quickSort", a);
+    	
+    	// Test mergeSortIterative
+    	a = null;
+    	a = SortComparison.mergeSortIterative(a);
+    	assertNull("Test empty array for mergeSortIterative", a);
+    	
+    	// Test mergeSortRecursive
+    	a = null;
+    	a = SortComparison.mergeSortRecursive(a);
+    	assertNull("Test empty array for mergeSortRecursive", a);
     }
     
     @Test
@@ -82,93 +82,113 @@ public class SortComparisonTest
     	
     }
     
-//    @Test
-//    public void testSelectionSort() {
-//    	
-//    	double[] a = {5, 2, 1, 3, 4};
-//    	double[] a_sorted = {1, 2, 3, 4, 5};
-//    	
-//    	double[] b = {5.1, 2.5, 1.0, 3.4, 4.7};
-//    	double[] b_sorted = {1.0, 2.5, 3.4, 4.7, 5.1};
-//    	
-//    	double[] c = {1.0};
-//    	
-//    	a = SortComparison.selectionSort(a);
-//    	assertEquals("Test input as an integer array", a, a_sorted);
-//    	
-//    	b = SortComparison.selectionSort(b);
-//    	assertEquals("Test input as a decimal array", b, b_sorted);
-//    	
-//    	c = SortComparison.selectionSort(c);
-//    	assertEquals("Test input array only has one element", c, c);
-//    	
-//    }
-//    
-//    @Test
-//    public void testQuickSort() {
-//    	
-//    	double[] a = {5, 2, 1, 3, 4};
-//    	double[] a_sorted = {1, 2, 3, 4, 5};
-//    	
-//    	double[] b = {5.1, 2.5, 1.0, 3.4, 4.7};
-//    	double[] b_sorted = {1.0, 2.5, 3.4, 4.7, 5.1};
-//    	
-//    	double[] c = {1.0};
-//    	
-//    	a = SortComparison.quickSort(a);
-//    	assertEquals("Test input as an integer array", a, a_sorted);
-//    	
-//    	b = SortComparison.quickSort(b);
-//    	assertEquals("Test input as a decimal array", b, b_sorted);
-//    	
-//    	c = SortComparison.quickSort(c);
-//    	assertEquals("Test input array only has one element", c, c);
-//    	
-//    }
-//    
-//    @Test
-//    public void testMergeSortIterative() {
-//    	
-//    	double[] a = {5, 2, 1, 3, 4};
-//    	double[] a_sorted = {1, 2, 3, 4, 5};
-//    	
-//    	double[] b = {5.1, 2.5, 1.0, 3.4, 4.7};
-//    	double[] b_sorted = {1.0, 2.5, 3.4, 4.7, 5.1};
-//    	
-//    	double[] c = {1.0};
-//    	
-//    	a = SortComparison.mergeSortIterative(a);
-//    	assertEquals("Test input as an integer array", a, a_sorted);
-//    	
-//    	b = SortComparison.mergeSortIterative(b);
-//    	assertEquals("Test input as a decimal array", b, b_sorted);
-//    	
-//    	c = SortComparison.mergeSortIterative(c);
-//    	assertEquals("Test input array only has one element", c, c);
-//    	
-//    }
-//    
-//    @Test
-//    public void testMergeSortRecursive() {
-//    	
-//    	double[] a = {5, 2, 1, 3, 4};
-//    	double[] a_sorted = {1, 2, 3, 4, 5};
-//    	
-//    	double[] b = {5.1, 2.5, 1.0, 3.4, 4.7};
-//    	double[] b_sorted = {1.0, 2.5, 3.4, 4.7, 5.1};
-//    	
-//    	double[] c = {1.0};
-//    	
-//    	a = SortComparison.mergeSortRecursive(a);
-//    	assertEquals("Test input as an integer array", a, a_sorted);
-//    	
-//    	b = SortComparison.mergeSortRecursive(b);
-//    	assertEquals("Test input as a decimal array", b, b_sorted);
-//    	
-//    	c = SortComparison.mergeSortRecursive(c);
-//    	assertEquals("Test input array only has one element", c, c);
-//    	
-//    }
-//
+    @Test
+    public void testSelectionSort() {
+    	
+    	double[] a = {5, 2, 1, 3, 4};
+    	double[] a_sorted = {1, 2, 3, 4, 5};
+    	
+    	double[] b = {5.1, 2.5, 1.0, 3.4, 4.7};
+    	double[] b_sorted = {1.0, 2.5, 3.4, 4.7, 5.1};
+    	
+    	double[] c = {1.0};
+    	
+    	double delta = 0;
+    	
+    	a = SortComparison.selectionSort(a);
+    	assertArrayEquals("Test input as an integer array", a_sorted, a, delta);
+    	
+    	b = SortComparison.selectionSort(b);
+    	assertArrayEquals("Test input as a decimal array", b_sorted, b, delta);
+    	
+    	c = SortComparison.selectionSort(c);
+    	assertArrayEquals("Test input array only has one element", c, c, delta);
+    	
+    }
+    
+    @Test
+    public void testQuickSort() {
+    	
+    	double[] a = {5, 2, 1, 3, 4};
+    	double[] a_sorted = {1, 2, 3, 4, 5};
+    	
+    	double[] b = {5.1, 2.5, 1.0, 3.4, 4.7};
+    	double[] b_sorted = {1.0, 2.5, 3.4, 4.7, 5.1};
+    	
+    	double[] c = {1.0};
+    	
+    	double[] d = {5.1, 2.5, 1.0, 3.4, 4.7, 2.3, 1.2, 4.1};
+    	double[] d_sorted = {1.0, 1.2, 2.3, 2.5, 3.4, 4.1, 4.7, 5.1};
+    	
+    	double[] e = {10.0, -123.93, 261.34};
+    	double[] e_sorted = {-123.93, 10.0, 261.34};
+
+    	double delta = 0;
+    	
+    	a = SortComparison.quickSort(a);
+    	assertArrayEquals("Test input as an integer array", a_sorted, a, delta);
+    	
+    	b = SortComparison.quickSort(b);
+    	assertArrayEquals("Test input as a decimal array", b_sorted, b, delta);
+    	
+    	c = SortComparison.quickSort(c);
+    	assertArrayEquals("Test input array only has one element", c, c, delta);
+    	
+    	d = SortComparison.quickSort(d);
+    	assertArrayEquals("Test input as a complex decimal array", d_sorted, d, delta);
+    	
+    	e = SortComparison.quickSort(e);
+    	assertArrayEquals("Test input as a complex decimal array", e_sorted, e, delta);
+    	
+    }
+    
+    @Test
+    public void testMergeSortIterative() {
+    	
+    	double[] a = {5, 2, 1, 3, 4};
+    	double[] a_sorted = {1, 2, 3, 4, 5};
+    	
+    	double[] b = {5.1, 2.5, 1.0, 3.4, 4.7};
+    	double[] b_sorted = {1.0, 2.5, 3.4, 4.7, 5.1};
+    	
+    	double[] c = {1.0};
+    	
+    	double delta = 0;
+    	
+    	a = SortComparison.mergeSortIterative(a);
+    	assertArrayEquals("Test input as an integer array", a_sorted, a, delta);
+    	
+    	b = SortComparison.mergeSortIterative(b);
+    	assertArrayEquals("Test input as a decimal array", b_sorted, b, delta);
+    	
+    	c = SortComparison.mergeSortIterative(c);
+    	assertArrayEquals("Test input array only has one element", c, c, delta);
+    	
+    }
+    
+    @Test
+    public void testMergeSortRecursive() {
+    	
+    	double[] a = {5, 2, 1, 3, 4};
+    	double[] a_sorted = {1, 2, 3, 4, 5};
+    	
+    	double[] b = {5.1, 2.5, 1.0, 3.4, 4.7};
+    	double[] b_sorted = {1.0, 2.5, 3.4, 4.7, 5.1};
+    	
+    	double[] c = {1.0};
+    	
+    	double delta = 0;
+    	
+    	a = SortComparison.mergeSortRecursive(a);
+    	assertArrayEquals("Test input as an integer array", a_sorted, a, delta);
+    	
+    	b = SortComparison.mergeSortRecursive(b);
+    	assertArrayEquals("Test input as a decimal array", b_sorted, b, delta);
+    	
+    	c = SortComparison.mergeSortRecursive(c);
+    	assertArrayEquals("Test input array only has one element", c, c, delta);
+    	
+    }
+
 }
 
