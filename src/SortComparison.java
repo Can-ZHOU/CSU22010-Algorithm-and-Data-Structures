@@ -218,9 +218,6 @@ import java.util.Arrays;
     public static void main(String[] args) {
 
         //todo: do experiments as per assignment instructions
-//    	double a[] = {5,2,3,1,4};
-//    	mergeSortIterative(a);
-//    	System.out.println(Arrays.toString(a));
     }
 
  }//end class

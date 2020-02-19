@@ -1,6 +1,11 @@
 import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Scanner;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -189,6 +194,35 @@ public class SortComparisonTest
     	assertArrayEquals("Test input array only has one element", c, c, delta);
     	
     }
+    
+    // ----------------------------------------------------------
+    /**
+     *  Main Method.
+     *  Use this main method to create the experiments needed to answer the experimental performance questions of this assignment.
+     * @throws IOException 
+     *
+     */
+    public static void main(String[] args) throws IOException {
+    	Scanner sc = new Scanner(System.in); 
+        System.out.println("Please input file name: "); 
+        String fileName = sc.nextLine();
+        sc.close();
+        
+        try {
+			InputStream file = new FileInputStream(fileName);
+			int size = file.available();
+			
+			for(int i=0; i<size; i++) {
+				
+			}
+			
+			file.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+        
+    }
+
 
 }
 
