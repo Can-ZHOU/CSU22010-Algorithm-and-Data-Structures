@@ -1,15 +1,34 @@
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertNull;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+
+//-------------------------------------------------------------------------
+/**
+ * Time Comparison [All values are in Nano Seconds (ns) and are the average time from 10 experiments]
+ * 
+ * | Nano Seconds (ns)   | Insert    | Selection   | Merge Recursive | Merge Iterative | Quick      |
+ * |---------------------|-----------|-------------|-----------------|-----------------|------------|
+ * | 10   random         | 72690.0   | 2440.0      | 5710.0          | 6500.0          | 1760.0     |
+ * | 100  random         | 149410.0  | 150700.0    | 34220.0         | 44430.0         | 21440.0    |
+ * | 1000 random         | 3248300.0 | 2368166.667 | 253433.333      | 248600.0        | 180633.333 |
+ * | 1000 few unique     | 1748290.0 | 1038250.0   | 157940.0        | 178520.0        | 111660.0   |
+ * | 1000 nearly ordered | 1482530.0 | 1402020.0   | 235100.0        | 255060.0        | 272550.0   |
+ * | 1000 reverse order  | 1327770.0 | 1493130.0   | 121870.0        | 133430.0        | 1240760.0  |
+ * | 1000 sorted         | 1156040.0 | 1129780.0   | 120020.0        | 145560.0        | 827120.0   |
+ * 
+ * Questions:
+ * a. 
+ */
 
 //-------------------------------------------------------------------------
 /**
@@ -203,24 +222,112 @@ public class SortComparisonTest
      *
      */
     public static void main(String[] args) throws IOException {
+    	
+    //~ Read file ---------------------------------------------
     	Scanner sc = new Scanner(System.in); 
         System.out.println("Please input file name: "); 
         String fileName = sc.nextLine();
         sc.close();
         
-        try {
-			InputStream file = new FileInputStream(fileName);
-			int size = file.available();
-			
-			for(int i=0; i<size; i++) {
-				
-			}
-			
-			file.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+        File file = new File(fileName);
         
+        BufferedReader reader = null;
+        ArrayList<Double> list = new ArrayList<Double>();
+        
+        try {
+        	reader = new BufferedReader(new FileReader(file));
+        	String tempString;
+        	while ((tempString = reader.readLine()) != null) {
+        		list.add(Double.parseDouble(tempString));
+        	}
+        	reader.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+        	if(reader != null) {
+        		reader.close();
+        	}
+        }
+        
+    //~ Comparison -------------------------------------------
+        double[] a = new double[list.size()];
+        long timeSum = 0;
+        double average;
+        
+        // Insert
+        timeSum = 0;
+        average = 0;
+        for(int n=0; n<10; n++) {
+        	for(int i=0; i<list.size(); i++) {
+            	a[i] = list.get(i);
+            }
+            long startInsert = System.nanoTime();
+            SortComparison.insertionSort(a);
+            long endInsert = System.nanoTime();
+            timeSum += endInsert - startInsert;
+        }
+        average = (double)timeSum/10.0;
+        System.out.println("The insertionSort average time is " + average + " ns");
+        
+        // Selection
+        timeSum = 0;
+        average = 0;
+        for(int n=0; n<10; n++) {
+        	for(int i=0; i<list.size(); i++) {
+            	a[i] = list.get(i);
+            }
+            long startInsert = System.nanoTime();
+            SortComparison.selectionSort(a);
+            long endInsert = System.nanoTime();
+            timeSum += endInsert - startInsert;
+        }
+        average = (double)timeSum/10.0;
+        System.out.println("The selectionSort average time is " + average + " ns");
+        
+        // Merge Recursive
+        timeSum = 0;
+        average = 0;
+        for(int n=0; n<10; n++) {
+        	for(int i=0; i<list.size(); i++) {
+            	a[i] = list.get(i);
+            }
+            long startInsert = System.nanoTime();
+            SortComparison.mergeSortRecursive(a);
+            long endInsert = System.nanoTime();
+            timeSum += endInsert - startInsert;
+        }
+        average = (double)timeSum/10.0;
+        System.out.println("The mergeSortRecursive average time is " + average + " ns");
+        
+        // Merge Iterative
+        timeSum = 0;
+        average = 0;
+        for(int n=0; n<10; n++) {
+        	for(int i=0; i<list.size(); i++) {
+            	a[i] = list.get(i);
+            }
+            long startInsert = System.nanoTime();
+            SortComparison.mergeSortIterative(a);
+            long endInsert = System.nanoTime();
+            timeSum += endInsert - startInsert;
+        }
+        average = (double)timeSum/10.0;
+        System.out.println("The mergeSortIterative average time is " + average + " ns");
+        
+        // Quick
+        timeSum = 0;
+        average = 0;
+        for(int n=0; n<10; n++) {
+        	for(int i=0; i<list.size(); i++) {
+            	a[i] = list.get(i);
+            }
+            long startInsert = System.nanoTime();
+            SortComparison.quickSort(a);
+            long endInsert = System.nanoTime();
+            timeSum += endInsert - startInsert;
+        }
+        average = (double)timeSum/10.0;
+        System.out.println("The quickSort average time is " + average + " ns");
     }
 
 
