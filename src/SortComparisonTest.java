@@ -18,23 +18,49 @@ import org.junit.runners.JUnit4;
  * 
  * | Nano Seconds (ns)   | Insert    | Selection   | Merge Recursive | Merge Iterative | Quick      |
  * |---------------------|-----------|-------------|-----------------|-----------------|------------|
- * | 10   random         | 72690.0   | 2440.0      | 5710.0          | 6500.0          | 1760.0     |
+ * | 10   random         | 72690.0   | 2440.0      | 4050.0          | 4670.0          | 1760.0     |
  * | 100  random         | 149410.0  | 150700.0    | 34220.0         | 44430.0         | 21440.0    |
  * | 1000 random         | 3248300.0 | 2368166.667 | 253433.333      | 248600.0        | 180633.333 |
  * | 1000 few unique     | 1748290.0 | 1038250.0   | 157940.0        | 178520.0        | 111660.0   |
- * | 1000 nearly ordered | 1482530.0 | 1402020.0   | 235100.0        | 255060.0        | 272550.0   |
+ * | 1000 nearly ordered | 1054670.0 | 1402020.0   | 140050.0        | 149950.0        | 325270.0   |
  * | 1000 reverse order  | 1327770.0 | 1493130.0   | 121870.0        | 133430.0        | 1240760.0  |
- * | 1000 sorted         | 1156040.0 | 1129780.0   | 120020.0        | 145560.0        | 827120.0   |
+ * | 1000 sorted         | 919560.0  | 1129780.0   | 120020.0        | 145560.0        | 936370.0   |
  * 
  * Questions:
- * a. 
+ * a. Which of the sorting algorithms does the order of input have an impact on? Why?
+ * 	  ANSWER :
+ * 	  Two algorithms -- Insertion Sort and Quick Sort will be heavily affected by the order of input.
+ * 	  Insertion Sort:
+ *    Quick Sort:
+ *    Other algorithms like Selection Sort and Merge Sort are not really affected by the order of input.
+ *    
+ * b. Which algorithm has the biggest difference between the best and worst performance, based on the type of input, for the input of size 1000? Why?
+ * 	  ANSWER:
+ *    Insertion Sort.
+ *    By comparing 1000 random and 1000 sorted input data.
+ *    Best: O(n)
+ *    Worst: O(n^2)
+ *
+ * c. Which algorithm has the best/worst scalability, i.e., the difference in performance time based on the input size? Please consider only input files with random order for this answer.
+ *    ANSWER:
+ *    Selection Sort.
+ *    
+ * d. Did you observe any difference between iterative and recursive implementations of merge sort?
+ *    ANSWER:
+ *    Recursive faster than iterative ?
+ *    https://stackoverflow.com/a/17417822/10596389
+ *    
+ * e. Which algorithm is the fastest for each of the 7 input files?
+ *    ANSWER:
+ *    Merge Recursive ?
+ *    
  */
 
 //-------------------------------------------------------------------------
 /**
  *  Test class for SortComparison.java
  *
- *  @author
+ *  @author Can Zhou 
  *  @version HT 2020
  */
 @RunWith(JUnit4.class)
