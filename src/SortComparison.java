@@ -20,9 +20,11 @@ import java.util.Arrays;
      *
      */
     static double [] insertionSort (double a[]){
+    	// If a is an empty array or only has one element, return a.
     	if(a==null || a.length < 2) {
     		return a;
     	}
+    	
     	for(int i=0; i<a.length; i++) {
     		for(int j=i; j>0; j--) {
     			if(a[j] < a[j-1]) {
@@ -43,16 +45,20 @@ import java.util.Arrays;
      *
      */
     static double [] selectionSort (double a[]){
+    	// If a is an empty array or only has one element, return a.
     	if(a==null || a.length < 2) {
     		return a;
     	}
+    	
     	for(int i=0; i<a.length-1; i++) {
     		int min_index = i;
+    		// Find element with min value in the unsorted list.
     		for(int j=i+1; j<a.length; j++) {
     			if(a[j] < a[min_index]) {
     				min_index = j;
     			}
     		}
+    		// Swap i element and min element.
     		double tmp = a[i];
     		a[i] = a[min_index];
     		a[min_index] = tmp;
@@ -79,7 +85,11 @@ import java.util.Arrays;
     	if(hi<=lo) {
     		return;
     	}
+    	
+    	// Partition
     	int pivotPos = partition(a, lo, hi);
+    	
+    	// Recursive
     	recursiveQuick(a, lo, pivotPos-1);
     	recursiveQuick(a, pivotPos+1, hi);
     }
@@ -93,8 +103,7 @@ import java.util.Arrays;
     			if(i == hi) break;
     		}
     		while(a[--j] >= pivot) {
-    			if(j == lo) 
-    				break;	
+    			if(j == lo) break;	
     			
     		}
     		if(i >= j) break;
@@ -138,12 +147,12 @@ import java.util.Arrays;
     }
     
     private static void mergeIterative (double a[], double aux[], int lo, int mid, int hi) {
-    	// copy
+    	// Copy
     	for(int k=lo; k<=hi; k++) {
     		aux[k] = a[k];
     	}
     	
-    	// merge
+    	// Merge
     	int i=lo, j=mid+1;
     	for(int k=lo; k<=hi; k++) {
     		if(i>mid) {
@@ -190,12 +199,12 @@ import java.util.Arrays;
     }
     
     private static void mergeRecursive(double a[], double aux[], int lo, int mid, int hi) {
-    	// copy
+    	// Copy
     	for(int k=lo; k<=hi; k++) {
     		aux[k] = a[k];
     	}
     	
-    	// merge
+    	// Merge
     	int i=lo, j=mid+1;
     	for(int k=lo; k<=hi; k++) {
     		if(i>mid) {
