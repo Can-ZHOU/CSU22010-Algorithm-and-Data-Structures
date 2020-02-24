@@ -14,55 +14,87 @@ import org.junit.runners.JUnit4;
 
 //-------------------------------------------------------------------------
 /**
- * Time Comparison [All values are in Nano Seconds (ns) and are the average time from 10 experiments]
+*  Test class for SortComparison.java
+*
+*  @author Can Zhou (19324118 zhouc@tcd.ie)
+*  @version HT 2020
+*/
+
+//-------------------------------------------------------------------------
+/**
+ * Time Comparison: [All values are in Nano Seconds (ns) and are the average time from 10 experiments' results]
  * 
- * | Nano Seconds (ns)   | Insert    | Selection   | Merge Recursive | Merge Iterative | Quick      |
- * |---------------------|-----------|-------------|-----------------|-----------------|------------|
- * | 10   random         | 72690.0   | 2440.0      | 4050.0          | 4670.0          | 1760.0     |
- * | 100  random         | 149410.0  | 150700.0    | 34220.0         | 44430.0         | 21440.0    |
- * | 1000 random         | 3248300.0 | 2368166.667 | 253433.333      | 248600.0        | 180633.333 |
- * | 1000 few unique     | 1748290.0 | 1038250.0   | 157940.0        | 178520.0        | 111660.0   |
- * | 1000 nearly ordered | 1054670.0 | 1402020.0   | 140050.0        | 149950.0        | 325270.0   |
- * | 1000 reverse order  | 1327770.0 | 1493130.0   | 121870.0        | 133430.0        | 1240760.0  |
- * | 1000 sorted         | 919560.0  | 1129780.0   | 120020.0        | 145560.0        | 936370.0   |
+ * |---------------------+-----------+-----------+-----------------+-----------------+-----------|
+ * | Nano Seconds (ns)   | Insert    | Selection | Merge Recursive | Merge Iterative | Quick     |
+ * |---------------------+-----------+-----------+-----------------+-----------------+-----------|
+ * | 10   random         | 72690.0   | 2440.0    | 4050.0          | 4670.0          | 1760.0    |
+ * |---------------------+-----------+-----------+-----------------+-----------------+-----------|
+ * | 100  random         | 149410.0  | 150700.0  | 34220.0         | 44430.0         | 21440.0   |
+ * |---------------------+-----------+-----------+-----------------+-----------------+-----------|
+ * | 1000 random         | 1275260.0 | 1069970.0 | 163050.0        | 178270.0        | 99500.0   |
+ * |---------------------+-----------+-----------+-----------------+-----------------+-----------|
+ * | 1000 few unique     | 1210710.0 | 1038250.0 | 157940.0        | 178520.0        | 111660.0  |
+ * |---------------------+-----------+-----------+-----------------+-----------------+-----------|
+ * | 1000 nearly ordered | 1054670.0 | 1402020.0 | 140050.0        | 149950.0        | 325270.0  |
+ * |---------------------+-----------+-----------+-----------------+-----------------+-----------|
+ * | 1000 reverse order  | 1327770.0 | 1493130.0 | 121870.0        | 133430.0        | 1240760.0 |
+ * |---------------------+-----------+-----------+-----------------+-----------------+-----------|
+ * | 1000 sorted         | 919560.0  | 1129780.0 | 120020.0        | 145560.0        | 936370.0  |
+ * |---------------------+-----------+-----------+-----------------+-----------------+-----------|
  * 
  * Questions:
  * a. Which of the sorting algorithms does the order of input have an impact on? Why?
  * 	  ANSWER :
  * 	  Two algorithms -- Insertion Sort and Quick Sort will be heavily affected by the order of input.
- * 	  Insertion Sort:
- *    Quick Sort:
+ * 	  Insertion Sort: If the input array is sorted, it will cause the best case that there won't have any swap while sorting.
+ * 					  But if reverse the input list, it will cause the worst the case that all iterations in inner loop will cost a swap.
+ * 					  Time complexity: Best --> O(n), Worst --> O(n^2).
+ *    Quick Sort:     If the array is in this order: the pivot element divides the list into two equal halves by coming exactly in the middle position, it will cause the best case.
+ *    				  But if array is already sorted in same order or reverse order, it will cause the worst case.
+ *    			      Time complexity: Best --> O(n log(n)), Worst --> O(n^2).
  *    Other algorithms like Selection Sort and Merge Sort are not really affected by the order of input.
  *    
  * b. Which algorithm has the biggest difference between the best and worst performance, based on the type of input, for the input of size 1000? Why?
  * 	  ANSWER:
  *    Insertion Sort.
- *    By comparing 1000 random and 1000 sorted input data.
- *    Best: O(n)
- *    Worst: O(n^2)
+ *    After comparing the different types of input, 
+ *    we can find that the sorted array has the best performance and the array with reverse order has the worst performance.
+ *    Reason: Insertion sort performs two operations: it scans through the list, comparing each pair of elements, 
+ *            and it swaps elements if they are out of order. Each operation contributes to the running time of the algorithm.
+ *    		  In the best case:  The input array is already in sorted order, 
+ *              			     insertion sort compares O(n) elements and performs no swaps.
+ *              			     Therefore, in the best case, insertion sort runs in O(n) time.
+ *      	  In the worst case: The input array is in decreasing/reverse order.
+ *      						 Each comparison will cost a swap.
+ *      						 Therefore, in the worst case, insertion sort runs in O(n^2) time.
  *
  * c. Which algorithm has the best/worst scalability, i.e., the difference in performance time based on the input size? Please consider only input files with random order for this answer.
  *    ANSWER:
- *    Selection Sort.
+ *    Merge sort has the best scalability.
+ *    Selection sort has the worst scalability.
+ *    I think algorithm's scalability is related with time complexity.
+ *    As in average, Merge sort's time complexity is O(n log(n)) while selection sort is O(n^2),
+ *    when input size is changing, selection sort will be more effected by input size than merge sort.
  *    
  * d. Did you observe any difference between iterative and recursive implementations of merge sort?
  *    ANSWER:
- *    Recursive faster than iterative ?
- *    https://stackoverflow.com/a/17417822/10596389
+ *    There is a slight difference between them that recursive implementation is a slightly faster than iterative.
+ *    I have done some research and one of explanations is because of caching improved performances.
+ *    Here is the reference link: https://stackoverflow.com/a/17417822/10596389
  *    
  * e. Which algorithm is the fastest for each of the 7 input files?
  *    ANSWER:
- *    Merge Recursive ?
+ *    1> 10 random: quick sort [in the random input/average case, quick sort has the best performance].
+ *    2> 100 random: quick sort [in the random input/average case, quick sort has the best performance].
+ *    3> 1000 random: quick sort [in the random input/average case, quick sort has the best performance].
+ *    4> 1000 few unique: quick sort [in the average case, quick sort has the best performance].
+ *    5> 1000 nearly ordered: Merge Recursive [the worst case for quick sort and order won't impact for merge sort which also has the same time complexity to quick sort].
+ *    6> 1000 reverse order: Merge Recursive [the worst case for quick sort and order won't impact for merge sort which also has the same time complexity to quick sort].
+ *    7> 1000 sorted: Merge Recursive [the worst case for quick sort and order won't impact for merge sort which also has the same time complexity to quick sort].
  *    
  */
 
 //-------------------------------------------------------------------------
-/**
- *  Test class for SortComparison.java
- *
- *  @author Can Zhou 
- *  @version HT 2020
- */
 @RunWith(JUnit4.class)
 public class SortComparisonTest
 {
