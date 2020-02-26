@@ -1,12 +1,25 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 // -------------------------------------------------------------------------
 
 /**
+ *  Version Control :
+ *  I have used git and connected it to GitHub: https://github.com/Can-ZHOU/CSU22010-Algorithm-and-Data-Structures
+ *  Version control has been used sensibly ¨C using meaningful commit messages, committing changes frequently at appropriate points.
+ *  The screenshot of the history of commits in my GitHub repository has been submitted in both webcat and blackbroad.
+ * 
+ *  Time Comparison and Question Answers are in the comment at the top of SortComparisonTest.java file.
+ * 
  *  This class contains static methods that implementing sorting of an array of numbers
  *  using different sort algorithms.
  *
- *  @author Can Zhou (19324118 zhouc@tcd.ie)
+ *  @author Can Zhou (19324118 zhouc@tcd.ie haven't share code or write code for others)
  *  @version HT 2020
  */
 
@@ -74,9 +87,12 @@ import java.util.Arrays;
      *
      */
     static double [] quickSort (double a[]){
+    	// If a is an empty array or only has one element, return a.
     	if(a==null || a.length < 2) {
     		return a;
     	}
+    	
+    	// Call recursive quick sort recursive
     	recursiveQuick(a, 0, a.length-1);
     	return a;
     }
@@ -132,6 +148,7 @@ import java.util.Arrays;
      */
 
     static double[] mergeSortIterative (double a[]) {
+    	// If a is an empty array or only has one element, return a.
     	if(a==null || a.length < 2) {
     		return a;
     	}
@@ -177,6 +194,7 @@ import java.util.Arrays;
      * @return after the method returns, the array must be in ascending sorted order.
      */
     static double[] mergeSortRecursive (double a[]) {
+    	// If a is an empty array or only has one element, return a.
     	if(a==null || a.length < 2) {
     		return a;
     	}
@@ -221,13 +239,114 @@ import java.util.Arrays;
     
 
 
-   
-
-
-    public static void main(String[] args) {
-
-        //todo: do experiments as per assignment instructions
-    }
+//  public static void main(String[] args) throws IOException {
+//	
+////~ Read file ---------------------------------------------
+//	Scanner sc = new Scanner(System.in); 
+//    System.out.println("Please input file name: "); 
+//    String fileName = sc.nextLine();
+//    sc.close();
+//    
+//    File file = new File(fileName);
+//    
+//    BufferedReader reader = null;
+//    ArrayList<Double> list = new ArrayList<Double>();
+//    
+//    try {
+//    	reader = new BufferedReader(new FileReader(file));
+//    	String tempString;
+//    	while ((tempString = reader.readLine()) != null) {
+//    		list.add(Double.parseDouble(tempString));
+//    	}
+//    	reader.close();
+//    } catch (Exception e) {
+//        e.printStackTrace();
+//    } finally {
+//    	if(reader != null) {
+//    		reader.close();
+//    	}
+//    }
+//    
+////~ Comparison -------------------------------------------
+//    double[] a = new double[list.size()];
+//    long timeSum = 0;
+//    double average;
+//    
+//    // Insert
+//    timeSum = 0;
+//    average = 0;
+//    for(int n=0; n<10; n++) {
+//    	for(int i=0; i<list.size(); i++) {
+//        	a[i] = list.get(i);
+//        }
+//        long startInsert = System.nanoTime();
+//        SortComparison.insertionSort(a);
+//        long endInsert = System.nanoTime();
+//        timeSum += endInsert - startInsert;
+//    }
+//    average = (double)timeSum/(10.0 * 1000000);
+//    System.out.println("The insertionSort average time is " + average + " ms");
+//    
+//    // Selection
+//    timeSum = 0;
+//    average = 0;
+//    for(int n=0; n<10; n++) {
+//    	for(int i=0; i<list.size(); i++) {
+//        	a[i] = list.get(i);
+//        }
+//        long startInsert = System.nanoTime();
+//        SortComparison.selectionSort(a);
+//        long endInsert = System.nanoTime();
+//        timeSum += endInsert - startInsert;
+//    }
+//    average = (double)timeSum/(10.0 * 1000000);
+//    System.out.println("The selectionSort average time is " + average + " ms");
+//    
+//    // Merge Recursive
+//    timeSum = 0;
+//    average = 0;
+//    for(int n=0; n<10; n++) {
+//    	for(int i=0; i<list.size(); i++) {
+//        	a[i] = list.get(i);
+//        }
+//        long startInsert = System.nanoTime();
+//        SortComparison.mergeSortRecursive(a);
+//        long endInsert = System.nanoTime();
+//        timeSum += endInsert - startInsert;
+//    }
+//    average = (double)timeSum/(10.0 * 1000000);
+//    System.out.println("The mergeSortRecursive average time is " + average + " ms");
+//    
+//    // Merge Iterative
+//    timeSum = 0;
+//    average = 0;
+//    for(int n=0; n<10; n++) {
+//    	for(int i=0; i<list.size(); i++) {
+//        	a[i] = list.get(i);
+//        }
+//        long startInsert = System.nanoTime();
+//        SortComparison.mergeSortIterative(a);
+//        long endInsert = System.nanoTime();
+//        timeSum += endInsert - startInsert;
+//    }
+//    average = (double)timeSum/(10.0 * 1000000);
+//    System.out.println("The mergeSortIterative average time is " + average + " ms");
+//    
+//    // Quick
+//    timeSum = 0;
+//    average = 0;
+//    for(int n=0; n<10; n++) {
+//    	for(int i=0; i<list.size(); i++) {
+//        	a[i] = list.get(i);
+//        }
+//        long startInsert = System.nanoTime();
+//        SortComparison.quickSort(a);
+//        long endInsert = System.nanoTime();
+//        timeSum += endInsert - startInsert;
+//    }
+//    average = (double)timeSum/(10.0 * 1000000);
+//    System.out.println("The quickSort average time is " + average + " ms");
+//}
 
  }//end class
 

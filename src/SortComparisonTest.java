@@ -16,31 +16,38 @@ import org.junit.runners.JUnit4;
 /**
 *  Test class for SortComparison.java
 *
-*  @author Can Zhou (19324118 zhouc@tcd.ie)
+*  @author Can Zhou (19324118 zhouc@tcd.ie haven't share code or write code for others)
 *  @version HT 2020
 */
 
 //-------------------------------------------------------------------------
+
 /**
- * Time Comparison: [All values are in Nano Seconds (ns) and are the average time from 10 experiments' results]
+ * Version Control :
+ * I have used git and connected it to GitHub: https://github.com/Can-ZHOU/CSU22010-Algorithm-and-Data-Structures
+ * Version control has been used sensibly ¨C using meaningful commit messages, committing changes frequently at appropriate points.
+ * The screenshot of the history of commits in my GitHub repository has been submitted in both webcat and blackbroad.
+ *  
+ *  
+ * Time Comparison: [All values are in Milliseconds (ms) and are the average time from 10 experiments' results]
  * 
- * |---------------------+-----------+-----------+-----------------+-----------------+-----------|
- * | Nano Seconds (ns)   | Insert    | Selection | Merge Recursive | Merge Iterative | Quick     |
- * |---------------------+-----------+-----------+-----------------+-----------------+-----------|
- * | 10   random         | 72690.0   | 2440.0    | 4050.0          | 4670.0          | 1760.0    |
- * |---------------------+-----------+-----------+-----------------+-----------------+-----------|
- * | 100  random         | 149410.0  | 150700.0  | 34220.0         | 44430.0         | 21440.0   |
- * |---------------------+-----------+-----------+-----------------+-----------------+-----------|
- * | 1000 random         | 1275260.0 | 1069970.0 | 163050.0        | 178270.0        | 99500.0   |
- * |---------------------+-----------+-----------+-----------------+-----------------+-----------|
- * | 1000 few unique     | 1210710.0 | 1038250.0 | 157940.0        | 178520.0        | 111660.0  |
- * |---------------------+-----------+-----------+-----------------+-----------------+-----------|
- * | 1000 nearly ordered | 1054670.0 | 1402020.0 | 140050.0        | 149950.0        | 325270.0  |
- * |---------------------+-----------+-----------+-----------------+-----------------+-----------|
- * | 1000 reverse order  | 1327770.0 | 1493130.0 | 121870.0        | 133430.0        | 1240760.0 |
- * |---------------------+-----------+-----------+-----------------+-----------------+-----------|
- * | 1000 sorted         | 919560.0  | 1129780.0 | 120020.0        | 145560.0        | 936370.0  |
- * |---------------------+-----------+-----------+-----------------+-----------------+-----------|
+ * |---------------------+---------+-----------+-----------------+-----------------+---------|
+ * | Milliseconds (ms)   | Insert  | Selection | Merge Recursive | Merge Iterative | Quick   |
+ * |---------------------+---------+-----------+-----------------+-----------------+---------|
+ * | 10   random         | 0.07269 | 0.00244   | 0.00405         | 0.00467         | 0.00176 |
+ * |---------------------+---------+-----------+-----------------+-----------------+---------|
+ * | 100  random         | 0.14941 | 0.1507    | 0.03422         | 0.04443         | 0.02144 |
+ * |---------------------+---------+-----------+-----------------+-----------------+---------|
+ * | 1000 random         | 1.27526 | 1.06997   | 0.16305         | 0.17827         | 0.0995  |
+ * |---------------------+---------+-----------+-----------------+-----------------+---------|
+ * | 1000 few unique     | 1.21071 | 1.03825   | 0.15794         | 0.17852         | 0.11166 |
+ * |---------------------+---------+-----------+-----------------+-----------------+---------|
+ * | 1000 nearly ordered | 1.05467 | 1.40202   | 0.14005         | 0.14995         | 0.32527 |
+ * |---------------------+---------+-----------+-----------------+-----------------+---------|
+ * | 1000 reverse order  | 1.32777 | 1.49313   | 0.12187         | 0.13343         | 1.24076 |
+ * |---------------------+---------+-----------+-----------------+-----------------+---------|
+ * | 1000 sorted         | 0.91956 | 1.12978   | 0.12002         | 0.14556         | 0.93637 |
+ * |---------------------+---------+-----------+-----------------+-----------------+---------|
  * 
  * Questions:
  * a. Which of the sorting algorithms does the order of input have an impact on? Why?
@@ -58,9 +65,10 @@ import org.junit.runners.JUnit4;
  * 	  ANSWER:
  *    Insertion Sort.
  *    After comparing the different types of input, 
- *    we can find that the sorted array has the best performance and the array with reverse order has the worst performance.
+ *    we can find that for the Insertion Sort, the sorted array has the best performance and the array with reverse order has the worst performance.
  *    Reason: Insertion sort performs two operations: it scans through the list, comparing each pair of elements, 
- *            and it swaps elements if they are out of order. Each operation contributes to the running time of the algorithm.
+ *            										  and it swaps elements if they are out of order. 
+ *            										  Each operation contributes to the running time of the algorithm.
  *    		  In the best case:  The input array is already in sorted order, 
  *              			     insertion sort compares O(n) elements and performs no swaps.
  *              			     Therefore, in the best case, insertion sort runs in O(n) time.
@@ -73,8 +81,9 @@ import org.junit.runners.JUnit4;
  *    Merge sort has the best scalability.
  *    Selection sort has the worst scalability.
  *    I think algorithm's scalability is related with time complexity.
- *    As in average, Merge sort's time complexity is O(n log(n)) while selection sort is O(n^2),
- *    when input size is changing, selection sort will be more effected by input size than merge sort.
+ *    Larger time complexity will have worse scalability.
+ *    As in average/random, Merge sort's time complexity is O(n log(n)) while selection sort is O(n^2),
+ *    when input size (n) is changing, selection sort will have more difference in performance time based on the input size than merge sort which causes worse scalability.
  *    
  * d. Did you observe any difference between iterative and recursive implementations of merge sort?
  *    ANSWER:
@@ -84,13 +93,27 @@ import org.junit.runners.JUnit4;
  *    
  * e. Which algorithm is the fastest for each of the 7 input files?
  *    ANSWER:
- *    1> 10 random: quick sort [in the random input/average case, quick sort has the best performance].
- *    2> 100 random: quick sort [in the random input/average case, quick sort has the best performance].
- *    3> 1000 random: quick sort [in the random input/average case, quick sort has the best performance].
- *    4> 1000 few unique: quick sort [in the average case, quick sort has the best performance].
- *    5> 1000 nearly ordered: Merge Recursive [the worst case for quick sort and order won't impact for merge sort which also has the same time complexity to quick sort].
- *    6> 1000 reverse order: Merge Recursive [the worst case for quick sort and order won't impact for merge sort which also has the same time complexity to quick sort].
- *    7> 1000 sorted: Merge Recursive [the worst case for quick sort and order won't impact for merge sort which also has the same time complexity to quick sort].
+ *    1> 10 random: 		  Quick Sort 
+ *    				 		  Reason:				 
+ *    				 		  In the random and average case, quick sort has the best performance in time complexity.
+ *    2> 100 random: 		  Quick Sort 
+ *    				 		  Reason:				 
+ *    				 		  In the random and average case, quick sort has the best performance in time complexity.
+ *    3> 1000 random: 		  Quick Sort
+ *    				 		  Reason:				 
+ *    				 		  In the random and average case, quick sort has the best performance in time complexity.
+ *    4> 1000 few unique: 	  Quick Sort
+ *    				 		  Reason:				 
+ *    				 		  In the average case, quick sort has the best performance in time complexity.
+ *    5> 1000 nearly ordered: Merge Recursive 
+ *    						  Reason:
+ *    						  The worst case for quick sort and order won't impact for merge sort which also has the same time complexity as quick sort.
+ *    6> 1000 reverse order:  Merge Recursive
+ *    						  Reason:
+ *    						  The worst case for quick sort and order won't impact for merge sort which also has the same time complexity as quick sort.
+ *    7> 1000 sorted: 		  Merge Recursive
+ *    						  Reason:
+ *    						  The worst case for quick sort and order won't impact for merge sort which also has the same time complexity as quick sort.
  *    
  */
 
@@ -279,114 +302,114 @@ public class SortComparisonTest
      * @throws IOException 
      *
      */
-    public static void main(String[] args) throws IOException {
-    	
-    //~ Read file ---------------------------------------------
-    	Scanner sc = new Scanner(System.in); 
-        System.out.println("Please input file name: "); 
-        String fileName = sc.nextLine();
-        sc.close();
-        
-        File file = new File(fileName);
-        
-        BufferedReader reader = null;
-        ArrayList<Double> list = new ArrayList<Double>();
-        
-        try {
-        	reader = new BufferedReader(new FileReader(file));
-        	String tempString;
-        	while ((tempString = reader.readLine()) != null) {
-        		list.add(Double.parseDouble(tempString));
-        	}
-        	reader.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-        	if(reader != null) {
-        		reader.close();
-        	}
-        }
-        
-    //~ Comparison -------------------------------------------
-        double[] a = new double[list.size()];
-        long timeSum = 0;
-        double average;
-        
-        // Insert
-        timeSum = 0;
-        average = 0;
-        for(int n=0; n<10; n++) {
-        	for(int i=0; i<list.size(); i++) {
-            	a[i] = list.get(i);
-            }
-            long startInsert = System.nanoTime();
-            SortComparison.insertionSort(a);
-            long endInsert = System.nanoTime();
-            timeSum += endInsert - startInsert;
-        }
-        average = (double)timeSum/10.0;
-        System.out.println("The insertionSort average time is " + average + " ns");
-        
-        // Selection
-        timeSum = 0;
-        average = 0;
-        for(int n=0; n<10; n++) {
-        	for(int i=0; i<list.size(); i++) {
-            	a[i] = list.get(i);
-            }
-            long startInsert = System.nanoTime();
-            SortComparison.selectionSort(a);
-            long endInsert = System.nanoTime();
-            timeSum += endInsert - startInsert;
-        }
-        average = (double)timeSum/10.0;
-        System.out.println("The selectionSort average time is " + average + " ns");
-        
-        // Merge Recursive
-        timeSum = 0;
-        average = 0;
-        for(int n=0; n<10; n++) {
-        	for(int i=0; i<list.size(); i++) {
-            	a[i] = list.get(i);
-            }
-            long startInsert = System.nanoTime();
-            SortComparison.mergeSortRecursive(a);
-            long endInsert = System.nanoTime();
-            timeSum += endInsert - startInsert;
-        }
-        average = (double)timeSum/10.0;
-        System.out.println("The mergeSortRecursive average time is " + average + " ns");
-        
-        // Merge Iterative
-        timeSum = 0;
-        average = 0;
-        for(int n=0; n<10; n++) {
-        	for(int i=0; i<list.size(); i++) {
-            	a[i] = list.get(i);
-            }
-            long startInsert = System.nanoTime();
-            SortComparison.mergeSortIterative(a);
-            long endInsert = System.nanoTime();
-            timeSum += endInsert - startInsert;
-        }
-        average = (double)timeSum/10.0;
-        System.out.println("The mergeSortIterative average time is " + average + " ns");
-        
-        // Quick
-        timeSum = 0;
-        average = 0;
-        for(int n=0; n<10; n++) {
-        	for(int i=0; i<list.size(); i++) {
-            	a[i] = list.get(i);
-            }
-            long startInsert = System.nanoTime();
-            SortComparison.quickSort(a);
-            long endInsert = System.nanoTime();
-            timeSum += endInsert - startInsert;
-        }
-        average = (double)timeSum/10.0;
-        System.out.println("The quickSort average time is " + average + " ns");
-    }
+//    public static void main(String[] args) throws IOException {
+//    	
+//    //~ Read file ---------------------------------------------
+//    	Scanner sc = new Scanner(System.in); 
+//        System.out.println("Please input file name: "); 
+//        String fileName = sc.nextLine();
+//        sc.close();
+//        
+//        File file = new File(fileName);
+//        
+//        BufferedReader reader = null;
+//        ArrayList<Double> list = new ArrayList<Double>();
+//        
+//        try {
+//        	reader = new BufferedReader(new FileReader(file));
+//        	String tempString;
+//        	while ((tempString = reader.readLine()) != null) {
+//        		list.add(Double.parseDouble(tempString));
+//        	}
+//        	reader.close();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//        	if(reader != null) {
+//        		reader.close();
+//        	}
+//        }
+//        
+//    //~ Comparison -------------------------------------------
+//        double[] a = new double[list.size()];
+//        long timeSum = 0;
+//        double average;
+//        
+//        // Insert
+//        timeSum = 0;
+//        average = 0;
+//        for(int n=0; n<10; n++) {
+//        	for(int i=0; i<list.size(); i++) {
+//            	a[i] = list.get(i);
+//            }
+//            long startInsert = System.nanoTime();
+//            SortComparison.insertionSort(a);
+//            long endInsert = System.nanoTime();
+//            timeSum += endInsert - startInsert;
+//        }
+//        average = (double)timeSum/(10.0 * 1000000);
+//        System.out.println("The insertionSort average time is " + average + " ms");
+//        
+//        // Selection
+//        timeSum = 0;
+//        average = 0;
+//        for(int n=0; n<10; n++) {
+//        	for(int i=0; i<list.size(); i++) {
+//            	a[i] = list.get(i);
+//            }
+//            long startInsert = System.nanoTime();
+//            SortComparison.selectionSort(a);
+//            long endInsert = System.nanoTime();
+//            timeSum += endInsert - startInsert;
+//        }
+//        average = (double)timeSum/(10.0 * 1000000);
+//        System.out.println("The selectionSort average time is " + average + " ms");
+//        
+//        // Merge Recursive
+//        timeSum = 0;
+//        average = 0;
+//        for(int n=0; n<10; n++) {
+//        	for(int i=0; i<list.size(); i++) {
+//            	a[i] = list.get(i);
+//            }
+//            long startInsert = System.nanoTime();
+//            SortComparison.mergeSortRecursive(a);
+//            long endInsert = System.nanoTime();
+//            timeSum += endInsert - startInsert;
+//        }
+//        average = (double)timeSum/(10.0 * 1000000);
+//        System.out.println("The mergeSortRecursive average time is " + average + " ms");
+//        
+//        // Merge Iterative
+//        timeSum = 0;
+//        average = 0;
+//        for(int n=0; n<10; n++) {
+//        	for(int i=0; i<list.size(); i++) {
+//            	a[i] = list.get(i);
+//            }
+//            long startInsert = System.nanoTime();
+//            SortComparison.mergeSortIterative(a);
+//            long endInsert = System.nanoTime();
+//            timeSum += endInsert - startInsert;
+//        }
+//        average = (double)timeSum/(10.0 * 1000000);
+//        System.out.println("The mergeSortIterative average time is " + average + " ms");
+//        
+//        // Quick
+//        timeSum = 0;
+//        average = 0;
+//        for(int n=0; n<10; n++) {
+//        	for(int i=0; i<list.size(); i++) {
+//            	a[i] = list.get(i);
+//            }
+//            long startInsert = System.nanoTime();
+//            SortComparison.quickSort(a);
+//            long endInsert = System.nanoTime();
+//            timeSum += endInsert - startInsert;
+//        }
+//        average = (double)timeSum/(10.0 * 1000000);
+//        System.out.println("The quickSort average time is " + average + " ms");
+//    }
 
 
 }
