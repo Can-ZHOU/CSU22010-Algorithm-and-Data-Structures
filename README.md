@@ -44,6 +44,5 @@
 | Bubble | O(n)/Array is sorted. | O(n^2) | O(n^2)/Array is sorted in reverse order. | Yes | Yes |
 | Selection | O(n^2) | O(n^2) | O(n^2) | No | Yes |
 | Shell | 
-
-- Bubble sort
-  - 
+| Merge | O(nlogn) | O(nlogn) | O(nlogn) | Yes | No/O(n) |
+| Quick | O(nlogn)/when the pivot element divides the list into two equal halves by coming exactly in the middle position. | O(nlogn) | O(n^2)/Array is in ascending or descending order. | No | Yes |
