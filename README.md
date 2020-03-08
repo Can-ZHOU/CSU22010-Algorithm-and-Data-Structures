@@ -46,3 +46,51 @@
 | Shell | 
 | Merge | O(nlogn) | O(nlogn) | O(nlogn) | Yes | No/O(n) |
 | Quick | O(nlogn)/when the pivot element divides the list into two equal halves by coming exactly in the middle position. | O(nlogn) | O(n^2)/Array is in ascending or descending order. | No | Yes |
+
+## Substring search
+### Brute force
+
+### KMP
+- avoid back up by using DFA
+- Key point update restart state: X = dfa[pat.charAt(j)][X]
+
+## String
+### Key-Indexed Counting
+- Count frequencies of each letter using key as index.
+- Computer frequency cumulates which specify destinations.
+- Access cumulaters using key as index to move items.
+- Copy back into original array.
+- Propotion:
+  - Time: N+R
+  - Space: N+R
+  - Stable: Yes
+
+### Radix Sorts
+  - LSD [Least Significant Digit first]
+    - Strings have same length.
+    - From right to left.
+    - Propotion:
+      - Time: W(N+R)
+      - Space: N+R
+      - Stable: Yes.
+  - MSD [Most Significant Digit first]
+    - Partition array into R (radix) pieces according to the first character (most significant digit) using key-indexed counting.
+    - Recursively sort all strings that start with each character (key-indexed counts delineate subarraysto sort)
+    - Propotion:
+      - Time: W(N+R)
+      - Space: N+DR
+      - Stable: Yes.
+### Select sorting algorithms
+| Algorithm | Situation |
+| :---: | :---: |
+| Insertion | Small array, array in (almost) order |
+| Quick | General purpose when space is tight |
+| Merge | General purpose stable |
+| 3-way quick | Larger number of equal keys |
+| LSD | Short fixed-length strings |
+| MSD | Random Strings|
+| 3-way string quicksort | General purpose, string with long pre-fix matches |
+    
+    
+    
+
