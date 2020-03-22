@@ -54,6 +54,18 @@
 - avoid back up by using DFA
 - Key point update restart state: X = dfa[pat.charAt(j)][X]
 
+### Boyer-Moore
+- Big idea –when find a character not in the pattern, can skip up to M characters (so no need to loop through all N characters)
+- Uses backup
+- How much to skip?
+  - Skip alignments until (a) mismatch becomes a match
+  - Sort text moves past mismatched character
+
+### Rabin-Karp - modular hashing
+- First R entries:Use Horner'srule.
+- Remaining entries:Use rolling hash (and %to avoid overflow)
+
+
 ## String
 ### Key-Indexed Counting
 - Count frequencies of each letter using key as index.
@@ -91,6 +103,7 @@
 | MSD | Random Strings|
 | 3-way string quicksort | General purpose, string with long pre-fix matches |
     
-    
-    
-
+     
+## Tries
+### R-way
+### TST
