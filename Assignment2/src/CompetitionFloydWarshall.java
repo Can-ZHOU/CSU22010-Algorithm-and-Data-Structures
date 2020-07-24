@@ -19,6 +19,11 @@ import java.util.Scanner;
  * This class implements the competition using Floyd-Warshall algorithm
  */
 
+/**
+ * @author Can Zhou (19324118 zhouc@tcd.ie haven't share code or write code for others)
+ * 
+ * Discussion has been commented at the top of CompetitionTests.java file.
+ */
 public class CompetitionFloydWarshall {
 	
 	public int slowestSpeed;
@@ -34,7 +39,8 @@ public class CompetitionFloydWarshall {
      * @param sA, sB, sC: speeds for 3 contestants
      */
     CompetitionFloydWarshall (String filename, int sA, int sB, int sC){
-
+    	
+    	// Try to read from file
     	try{
 			this.filename = filename;
 			File file = new File(filename);
@@ -52,6 +58,7 @@ public class CompetitionFloydWarshall {
 			int V = in.nextInt();
 			int E = in.nextInt();
 			
+			// If V or E is less or equal than 0, then the graph is invalid.
 			if(V <=0 || E <= 0) {
 				this.validFile = false;
 				return;
@@ -59,12 +66,14 @@ public class CompetitionFloydWarshall {
 			
 			dist = new double[V][V];
 			
+			// Initialize all distances to max value
 			for(int i=0; i<V; i++) {
 				for(int j=0; j<V; j++) {
 					dist[i][j] = Double.POSITIVE_INFINITY;
 				}
 			}
 			
+			// Read edges form file and update all edges' weights
 			while(in.hasNextLine() && in.hasNextInt()) {
 				int from = in.nextInt();
 				int to = in.nextInt();
@@ -72,24 +81,29 @@ public class CompetitionFloydWarshall {
 				dist[from][to] = weight;
 			}
 			
+			// Initialize source distance to 0.0
 			for(int i=0; i<V; i++) {
 				dist[i][i] = 0.0;
 			}
 			
+			// Floyd Warshall algorithm
 			for(int k=0; k<V; k++) {
 				for(int i=0; i<V; i++) {
 					for(int j=0; j<V; j++) {
+						// If new route is lower
 						if(dist[i][j] > dist[i][k] + dist[k][j]) {
 							dist[i][j] = dist[i][k] + dist[k][j];
 						}
 					}
 					
+					// If there has negative cycle in the graph
 					if(dist[i][i] < 0.0) {
 						this.hasNegativeCycle = true;
 					}
 				}
 			}
 			
+			// Find max distance
 			if(this.validFile) {
 	    		for(int i=0; i<V; i++) {
 	    			for(int j=0; j<V; j++) {
@@ -130,10 +144,5 @@ public class CompetitionFloydWarshall {
     	return s<=100&&s>=50;
     }
     
-//  public static void main(String[] args) {
-//	  CompetitionFloydWarshall test = new CompetitionFloydWarshall("tinyEWD.txt", 50, 75, 100);
-//	int time = test.timeRequiredforCompetition();
-//	System.out.println(time);
-//}
 
 }

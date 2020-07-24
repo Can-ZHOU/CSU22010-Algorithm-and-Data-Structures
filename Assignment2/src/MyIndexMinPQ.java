@@ -1,6 +1,10 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * Minimum-oriented indexed PQ implementation using a binary heap.
+ */
+
 public class MyIndexMinPQ<Key extends Comparable<Key>> implements Iterable<Integer> {
 
 	private int maxN;        // maximum number of elements on PQ
@@ -9,6 +13,7 @@ public class MyIndexMinPQ<Key extends Comparable<Key>> implements Iterable<Integ
     private int[] qp;        // inverse of pq - qp[pq[i]] = pq[qp[i]] = i
     private Key[] keys;      // keys[i] = priority of i
 	
+	@SuppressWarnings("unchecked")
 	public MyIndexMinPQ(int maxN) {
 
 		this.maxN = maxN;
@@ -18,7 +23,7 @@ public class MyIndexMinPQ<Key extends Comparable<Key>> implements Iterable<Integ
 		pq = new int[maxN + 1];
 		qp = new int[maxN + 1]; 
 		
-		//Initialise all indices in pq to -1
+		//Initialize all indices in PQ to -1
 		for (int i = 0; i <= maxN; i++)
 			qp[i] = -1;
 	}

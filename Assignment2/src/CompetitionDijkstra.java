@@ -20,7 +20,26 @@ import java.util.Scanner;
  * This class implements the competition using Dijkstra's algorithm
  */
 
-
+/**
+ *  @author Can Zhou (19324118 zhouc@tcd.ie haven't share code or write code for others)
+ * 
+ * 	Discussion has been commented at the top of CompetitionTests.java file.
+ *  Four additional files has been used to implement Dijkstra's data structure:
+ * 	a) MyBag.java
+ * 		- A generic bag or multiset, implemented using a singly linked list.
+ * 		- Being used to implement MyEdgeWeightedDiGraph.java.
+ * 
+ * 	b) MyDirectedEdge.java 
+ * 		- The data type provides methods for accessing the two endpoints of the directed edge and the weight.
+ * 		- Being used to implement MyEdgeWeightedDiGraph.java.
+ * 
+ *  c) MyEdgeWeightedDiGraph.java
+ *  	- An Edge-Weighted Directional Graph.
+ *  
+ *  d) MyIndexMinPQ.java
+ *  	- Minimum-oriented indexed PQ implementation using a binary heap.
+ *  	- Being used to implement MyEdgeWeightedDiGraph.java.
+ */
 
 public class CompetitionDijkstra {
 	
@@ -38,7 +57,8 @@ public class CompetitionDijkstra {
      * @param sA, sB, sC: speeds for 3 contestants
     */
     CompetitionDijkstra (String filename, int sA, int sB, int sC){
-
+    	
+    	// Try to read input file.
     	try{
 			this.filename = filename;
 			File file = new File(filename);
@@ -48,6 +68,7 @@ public class CompetitionDijkstra {
 			this.sB = sB;
 			this.sC = sC;
 			
+			// Implement an Edge-Weighted Directional Graph for Dijkstra.
 			this.graph = new MyEdgeWeightedDiGraph(in);
 			this.slowestSpeed = Math.min(Math.min(sA,sB),sC);
 
@@ -59,28 +80,35 @@ public class CompetitionDijkstra {
 		}
     	
     	
+    	// If graph is valid
     	if(this.graph != null && this.graph.isValid()) {
+    		// For each intersection
     		for(int intersection=0; intersection<graph.getV(); intersection++) {
     			this.distTo = new double[this.graph.getV()];
     			this.edgeTo = new MyDirectedEdge[this.graph.getV()];
     			
+    			// Initialize all distances to max value
     			for (int i=0; i<graph.getV(); i++) {
     				distTo[i] = Double.POSITIVE_INFINITY;
     			}
     			
+    			// Initialize source distance to 0.0
     			distTo[intersection] = 0.0;
     			
     			priorityQueue = new MyIndexMinPQ<Double>(graph.getV());
     			priorityQueue.insert(intersection, distTo[intersection]);
     			
     			while(!priorityQueue.isEmpty()) {
+    				// Get node with minimum distance and remove from PQ
     				int v = priorityQueue.delMin();
     				
+    				// For every edge related to source, relax them.
     				for(MyDirectedEdge e : graph.edgesAdjacentTo(v)) {
     					relax(e);
     				}
     			}
     			
+    			// Find max distance
     			for(int j=0; j<this.graph.getV(); j++) {
     				if(this.distTo[j] < Double.POSITIVE_INFINITY) {
     					if(this.maxDist < this.distTo[j]) {
@@ -97,13 +125,17 @@ public class CompetitionDijkstra {
     	int from = e.from();
     	int to = e.to();
     	
+    	// If new route is lower
     	if(this.distTo[to] > this.distTo[from] + e.weight()) {
     		this.distTo[to] = this.distTo[from] + e.weight();
     		this.edgeTo[to] = e;
     		
+    		// If PQ already contains to
     		if(this.priorityQueue.contains(to)) {
+    			// Update
     			this.priorityQueue.decreaseKey(to, this.distTo[to]);
     		} else {
+    			// else insert
     			this.priorityQueue.insert(to, this.distTo[to]);
     		}
     	}
@@ -125,13 +157,6 @@ public class CompetitionDijkstra {
     public boolean validSpeed(int s) {
     	return s<=100&&s>=50;
     }
-    
-    
-//    public static void main(String[] args) {
-//    	CompetitionDijkstra test = new CompetitionDijkstra("tinyEWD.txt", 50, 75, 100);
-//    	int time = test.timeRequiredforCompetition();
-//    	System.out.println(time);
-//	}
 
 }
 

@@ -1,4 +1,7 @@
-
+/**
+ * Each edge consists of two integers (naming the two vertices) and a real-value weight. 
+ * The data type provides methods for accessing the two endpoints of the directed edge and the weight.
+ */
 public class MyDirectedEdge {
 
 	private final int from;
